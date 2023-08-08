@@ -1,4 +1,6 @@
-const Navbar = () => {
+import { Link } from "@inertiajs/react";
+
+const Navbar = ({ user }) => {
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
@@ -49,21 +51,50 @@ const Navbar = () => {
                             About
                         </a>
                     </nav>
-
                     <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center lg:flex lg:justify-start">
-                        <a
-                            href="#"
-                            className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600 md:text-base"
-                        >
-                            Sign in
-                        </a>
+                        {!user ? (
+                            <>
+                                <Link
+                                    href={route("login")}
+                                    as="button"
+                                    className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600 md:text-base"
+                                >
+                                    Login
+                                </Link>
 
-                        <a
-                            href="#"
-                            className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
-                        >
-                            Sign up
-                        </a>
+                                <Link
+                                    href={route("register")}
+                                    as="button"
+                                    className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
+                                >
+                                    Register
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    href={route("dashboard")}
+                                    as="button"
+                                    className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600 md:text-base"
+                                >
+                                    Dashboard
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600 md:text-base"
+                                >
+                                    Setting
+                                </Link>
+                                <Link
+                                    href={route("logout")}
+                                    method="post"
+                                    as="button"
+                                    className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
+                                >
+                                    Logout
+                                </Link>
+                            </>
+                        )}
                     </div>
 
                     <button

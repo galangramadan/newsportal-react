@@ -6,7 +6,7 @@ const Homepage = (props) => {
     return (
         <>
             <Head title={props.title} />
-            <Navbar />
+            <Navbar user={props.auth.user} />
             <CardNews news={props.news} />
             <Pagination meta={props.news.meta} />
         </>
