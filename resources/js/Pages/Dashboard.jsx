@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, router } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
@@ -133,7 +133,7 @@ export default function Dashboard(props) {
                         </form>
                     </div>
 
-                    {props.myNews.length > 0 ? (
+                    {props.myNews && props.myNews.length > 0 ? (
                         props.myNews.map((news, i) => {
                             return (
                                 <div
@@ -169,13 +169,29 @@ export default function Dashboard(props) {
                                             {news.category}
                                         </p>
 
-                                        <div>
+                                        <div className="flex justify-end gap-10">
                                             <a
                                                 href="#"
                                                 className="font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
                                             >
                                                 Read more
                                             </a>
+                                            <Link
+                                                href={route("edit.news")}
+                                                method="get"
+                                                data={{ id: news.id }}
+                                                as="button"
+                                            >
+                                                Edit
+                                            </Link>
+                                            <Link
+                                                href={route("delete.news")}
+                                                method="post"
+                                                data={{ id: news.id }}
+                                                as="button"
+                                            >
+                                                Delete
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
